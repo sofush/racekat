@@ -1,0 +1,23 @@
+@startuml
+scale 1920*1080
+class Bruger {
+	brugernavn
+	kodeord
+	rolle
+	katte
+	{field} navn (valgfri)
+	{field} billede (valgfri)
+	{field} beskrivelse (valgfri)
+}
+class Kat {
+	navn
+	race
+	fødselsdato
+	køn
+	billede
+}
+class Rolle {}
+Rolle -r-- Bruger : < er
+Bruger -r-- Kat : > har
+@enduml
+
