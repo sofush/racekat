@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private String username, password;
+    private String username, password, name, about;
     private Role role;
 
-    public User(String username, String password, Role role) {
+    public User(String username, String password, Role role, String name, String about) {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.name = name;
+        this.about = about;
     }
 
     public String getUsername() {
@@ -35,6 +37,22 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
     }
 
     public List<String> getAuthorities() {
