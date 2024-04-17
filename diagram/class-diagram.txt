@@ -16,12 +16,12 @@ enum Role {
 	ADMIN
 }
 class Cat {
-	- id: OptionalInt
+	- id: Integer
 	- owner: String
 	- name: String
 	- breed: String
 	- dob: LocalDate
-	- male: boolean
+	- male: Boolean
 	+ ... constructor/getter/setter
 }
 class CatService {
