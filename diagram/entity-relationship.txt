@@ -1,0 +1,20 @@
+@startuml
+scale 1920*1080
+entity User {
+	*username : TEXT
+	password : TEXT
+	role : INTEGER
+	name : TEXT
+	about : TEXT
+}
+entity Cat {
+	*id : INTEGER
+	owner : TEXT NOT NULL
+	name : TEXT NOT NULL
+	breed : TEXT
+	dob : DATE
+	male : BOOLEAN
+}
+User ||..|{ Cat
+@enduml
+
