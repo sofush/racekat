@@ -5,9 +5,9 @@ class Bruger {
 	kodeord
 	rolle
 	katte
-	{field} navn (valgfri)
-	{field} billede (valgfri)
-	{field} beskrivelse (valgfri)
+	navn
+	billede
+	beskrivelse
 }
 class Kat {
 	navn
@@ -17,7 +17,9 @@ class Kat {
 	billede
 }
 class Rolle {}
-Rolle -r-- Bruger : < er
-Bruger -r-- Kat : > har
+
+Rolle "1" -r-- "1" Bruger
+Bruger "1" -r-- "0..*" Kat
+
 @enduml
 
