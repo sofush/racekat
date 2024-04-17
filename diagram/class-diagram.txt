@@ -1,0 +1,94 @@
+@startuml
+scale 1920*1080
+skinparam classAttributeIconSize 0
+class User {
+	- username: String
+	- password: String
+	- role: Role
+	- cats: List<Cat>
+	- name: String
+	- about: String
+	+ List<String> getAuthorities()
+	+ ... constructor/getter/setter
+}
+enum Role {
+	USER
+	ADMIN
+}
+class Cat {
+	- id: OptionalInt
+	- owner: String
+	- name: String
+	- breed: String
+	- dob: LocalDate
+	- male: boolean
+	+ ... constructor/getter/setter
+}
+class CatService {
+	- catRepo: CatRepository
+	+ CatService(CatRepository repo)
+	+ void addCat(Cat cat)
+	+ void updateCat(Cat cat)
+	+ void deleteCat(Cat cat)
+	+ Cat findCatById(int id)
+}
+class CatRepository {
+	- jdbc: JdbcTemplate
+	+ CatRepository(JdbcTemplate jdbc)
+	+ void addCat(Cat cat)
+	+ void updateCat(Cat cat)
+	+ void deleteCat(Cat cat)
+	+ Cat findCatById(int id)
+}
+class UserService {
+	- userRepo: UserRepository
+	+ UserService(UserRepository repo)
+	+ void addUser(User user)
+	+ void updateUser(User user)
+	+ void deleteUser(User user)
+	+ User findUserByUsername(String username)
+}
+class UserRepository {
+	- jdbc: JdbcTemplate
+	+ UserRepository(JdbcTemplate jdbc)
+	+ void addUser(User user)
+	+ void updateUser(User user)
+	+ void deleteUser(User user)
+	+ User findUserByUsername(String username)
+}
+class UserController {
+	- userService: UserService
+	+ UserController(UserService userService)
+	+ String registerUser()
+	+ String registerUserPost(User user)
+	+ String displayUser(String username)
+	+ String updateUser()
+	+ String updateUserPost(User user)
+	+ String deleteUser(String username)
+}
+class CatController {
+	- catService: CatService
+	+ CatController(CatService catService)
+	+ String addCat()
+	+ String addCatPost(Cat cat)
+	+ String updateCat()
+	+ String updateCatPost(Cat Cat)
+	+ String deleteCat(int id)
+}
+
+CatController -r-o CatService
+CatController ..> Cat
+CatRepository ..> Cat
+CatService ..> Cat
+CatService -r-o CatRepository
+
+UserController -r-o UserService
+UserController ..> User
+UserRepository ..> User
+UserService ..> User
+UserService -r-o UserRepository
+User -r-* Role
+User -l-o Cat
+
+@enduml
+
