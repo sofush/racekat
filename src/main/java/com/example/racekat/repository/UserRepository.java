@@ -32,7 +32,8 @@ public class UserRepository {
 
     public User findUserByUsername(String username) {
         String sql = """
-            SELECT password, role, name, about FROM User
+            SELECT username, password, role, name, about
+            FROM User
             WHERE username = ?;
             """;
 
