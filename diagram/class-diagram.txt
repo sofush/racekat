@@ -8,8 +8,8 @@ class User {
 	- cats: List<Cat>
 	- name: String
 	- about: String
+	{method} + ... constructor/getter/setter
 	+ List<String> getAuthorities()
-	+ ... constructor/getter/setter
 }
 enum Role {
 	USER
@@ -22,7 +22,7 @@ class Cat {
 	- breed: String
 	- dob: LocalDate
 	- male: Boolean
-	+ ... constructor/getter/setter
+	{method} + ... constructor/getter/setter
 }
 class UserController {
 	- userService: UserService
@@ -64,12 +64,14 @@ class UserRepository {
 	+ Cat findCatById(int id)
 }
 
+User "1" -r-* "1" Role
+User "1" -l-* "0..m" Cat
 UserController -r-o UserService
 UserRepository ..> User
+UserRepository ..> Cat
 UserService ..> User
+UserService ..> Cat
 UserService -r-o UserRepository
-User "1" -r-* "1" Role
-User "1" -l-* " 0..m" Cat
 
 @enduml
 
