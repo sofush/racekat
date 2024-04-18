@@ -29,6 +29,7 @@ public class SecurityConfiguration {
             // Kræver at alle HTTP-anmodninger skal autoriseres (med undtagelse af login siden, se nedenunder).
             // Kun adminstratorer kan tilgå "/admin" ruten.
             .authorizeHttpRequests((config) -> config
+                .requestMatchers("/register/user").permitAll()
                 .anyRequest().hasRole("USER")
             )
             .formLogin((config) -> config

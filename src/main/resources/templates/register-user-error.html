@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User registration error</title>
+</head>
+<body>
+    <div>Could not register user with the following reason:</div>
+    <ul>
+        <li th:text="${message}"></li>
+    </ul>
+</body>
+</html>

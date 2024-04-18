@@ -60,7 +60,7 @@ class UserController {
 	- userService: UserService
 	+ UserController(UserService userService)
 	+ String registerUser()
-	+ String registerUserPost(User user, String repeat_password)
+	+ String registerUserPost(User user, String repeat_password, Model model)
 	+ String displayUser(String username)
 	+ String updateUser()
 	+ String updateUserPost(User user)

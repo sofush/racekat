@@ -3,6 +3,7 @@ package com.example.racekat.repository;
 import com.example.racekat.entity.Role;
 import com.example.racekat.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -28,6 +29,22 @@ public class UserRepository {
                 );
                 """);
         }
+    }
+
+    public void addUser(User user) throws DataAccessException {
+        String sql = """
+            INSERT INTO User(username, password, role, name, about)
+            VALUES (?, ?, ?, ?, ?);
+            """;
+
+        this.jdbc.update(
+            sql,
+            user.getUsername(),
+            user.getPassword(),
+            user.getRole().ordinal(),
+            user.getName(),
+            user.getAbout()
+        );
     }
 
     public User findUserByUsername(String username) {
