@@ -5,14 +5,14 @@
     <title>Register user</title>
 </head>
 <body>
-    <form action="#" method="POST" th:action="@{/register/user}" th:object="${user}">
+    <form action="#" method="POST" th:action="@{/register/user}">
         <p>
             <label for="username">Username:</label>
-            <input type="text" id="username" th:field="*{username}" />
+            <input type="text" id="username" th:name="username"/>
         </p>
         <p>
             <label for="password">Password: </label>
-            <input type="text" id="password" name="password" th:field="*{password}">
+            <input type="text" id="password" th:name="password">
         </p>
         <p>
             <label for="repeat-password">Repeat password: </label>
@@ -20,11 +20,11 @@
         </p>
         <p>
             <label for="name">Name: </label>
-            <input type="text" id="name" name="name" th:field="*{name}">
+            <input type="text" id="name" th:name="name">
         </p>
         <p>
             <label for="about">Write something about yourself...</label>
-            <textarea name="about" id="about" th:field="*{about}"></textarea>
+            <textarea name="about" id="about" th:name="about"></textarea>
         </p>
         <p>
             <button type="submit">Register</button>

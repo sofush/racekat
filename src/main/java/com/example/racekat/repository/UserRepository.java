@@ -1,5 +1,6 @@
 package com.example.racekat.repository;
 
+import com.example.racekat.entity.Cat;
 import com.example.racekat.entity.Role;
 import com.example.racekat.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,18 @@ public class UserRepository {
                     name TEXT,
                     about TEXT,
                     PRIMARY KEY (username)
+                );
+                """);
+
+            this.jdbc.execute("""
+                CREATE TABLE IF NOT EXISTS Cat(
+                    id INTEGER AUTO_INCREMENT,
+                    owner TEXT NOT NULL,
+                    name TEXT NOT NULL,
+                    breed TEXT,
+                    dob DATE,
+                    male BOOLEAN,
+                    PRIMARY KEY (id)
                 );
                 """);
         }
@@ -69,5 +82,21 @@ public class UserRepository {
         if (users.isEmpty()) return null;
 
         return users.getFirst();
+    }
+
+    public void addCat(Cat cat) throws DataAccessException {
+        String sql = """
+            INSERT INTO Cat(owner, name, breed, dob, male)
+            VALUES (?, ?, ?, ?, ?);
+            """;
+
+        this.jdbc.update(
+            sql,
+            cat.getOwner(),
+            cat.getName(),
+            cat.getBreed(),
+            cat.getDob(),
+            cat.getMale()
+        );
     }
 }
