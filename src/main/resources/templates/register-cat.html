@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register cat</title>
+</head>
+<body>
+    <form action="#" method="POST" th:action="@{/register/cat}" th:object="${cat}">
+        <p>
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="*{name}"/>
+        </p>
+        <p>
+            <label for="breed">Breed:</label>
+            <input type="text" id="breed" th:field="*{breed}"/>
+        </p>
+        <p>
+            <label for="dob">Date of birth:</label>
+            <input type="date" id="dob" th:field="*{dob}"/>
+        </p>
+        <p>
+            <label for="male">Male:</label>
+            <input type="checkbox" id="male" th:field="*{male}"/>
+        </p>
+        <p>
+            <button type="submit">Register</button>
+        </p>
+    </form>
+</body>
+</html>

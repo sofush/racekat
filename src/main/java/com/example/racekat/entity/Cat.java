@@ -8,6 +8,8 @@ public class Cat {
     private LocalDate dob;
     private Boolean male;
 
+    public Cat() {}
+
     public Cat(Integer id, String owner, String name, String breed, LocalDate dob, Boolean male) {
         this.setId(id);
         this.owner = owner;

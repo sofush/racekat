@@ -69,8 +69,8 @@ class UserController {
 class CatController {
 	- catService: CatService
 	+ CatController(CatService catService)
-	+ String addCat()
-	+ String addCatPost(Cat cat)
+	+ String registerCat()
+	+ String registerCatPost(Cat cat, Principal principal, Model model)
 	+ String updateCat()
 	+ String updateCatPost(Cat Cat)
 	+ String deleteCat(int id)
