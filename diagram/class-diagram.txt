@@ -24,29 +24,32 @@ class Cat {
 	- male: Boolean
 	+ ... constructor/getter/setter
 }
-class CatService {
-	- catRepo: CatRepository
-	+ CatService(CatRepository repo)
-	+ void addCat(Cat cat)
-	+ void updateCat(Cat cat)
-	+ void deleteCat(Cat cat)
-	+ Cat findCatById(int id)
-}
-class CatRepository {
-	- jdbc: JdbcTemplate
-	+ CatRepository(JdbcTemplate jdbc)
-	+ void addCat(Cat cat)
-	+ void updateCat(Cat cat)
-	+ void deleteCat(Cat cat)
-	+ Cat findCatById(int id)
+class UserController {
+	- userService: UserService
+	+ UserController(UserService userService)
+	+ String registerUser(Model model)
+	+ String registerUserPost(String username, String password, String repeat_password, String name, String about, Model model)
+	+ String displayUser(String username, Model model)
+	+ String updateUser(Model model)
+	+ String updateUserPost(String username, String password, String repeat_password, String name, String about, Model model)
+	+ String deleteUser(String username, Model model)
+	+ String registerCat(Model model, Principal principal)
+	+ String registerCatPost(String owner, String name, String breed, LocalDate dob, String male, Model model)
+	+ String updateCat(Model model, Principal principal)
+	+ String updateCatPost(String owner, String name, String breed, LocalDate dob, String male, Model model)
+	+ String deleteCat(int id)
 }
 class UserService {
 	- userRepo: UserRepository
 	+ UserService(UserRepository repo)
-	+ void addUser(User user)
-	+ void updateUser(User user)
-	+ void deleteUser(User user)
+	+ void addUser(String username, String password, String repeat_password, String name, String about)
+	+ void updateUser(String username, String password, String repeat_password, String name, String about)
+	+ void deleteUser(String username)
 	+ User findUserByUsername(String username)
+	+ void addCat(String owner, String name, String breed, LocalDate dob, boolean male)
+	+ void updateCat(String owner, String name, String breed, LocalDate dob, boolean male)
+	+ void deleteCat(int id)
+	+ Cat findCatById(int id)
 }
 class UserRepository {
 	- jdbc: JdbcTemplate
@@ -55,40 +58,18 @@ class UserRepository {
 	+ void updateUser(User user)
 	+ void deleteUser(User user)
 	+ User findUserByUsername(String username)
+	+ void addCat(Cat cat)
+	+ void updateCat(Cat cat)
+	+ void deleteCat(Cat cat)
+	+ Cat findCatById(int id)
 }
-class UserController {
-	- userService: UserService
-	+ UserController(UserService userService)
-	+ String registerUser()
-	+ String registerUserPost(User user, String repeat_password, Model model)
-	+ String displayUser(String username)
-	+ String updateUser()
-	+ String updateUserPost(User user)
-	+ String deleteUser(String username)
-}
-class CatController {
-	- catService: CatService
-	+ CatController(CatService catService)
-	+ String registerCat()
-	+ String registerCatPost(Cat cat, Principal principal, Model model)
-	+ String updateCat()
-	+ String updateCatPost(Cat Cat)
-	+ String deleteCat(int id)
-}
-
-CatController -r-o CatService
-CatController ..> Cat
-CatRepository ..> Cat
-CatService ..> Cat
-CatService -r-o CatRepository
 
 UserController -r-o UserService
-UserController ..> User
 UserRepository ..> User
 UserService ..> User
 UserService -r-o UserRepository
-User -r-* Role
-User -l-o Cat
+User "1" -r-* "1" Role
+User "1" -l-* " 0..m" Cat
 
 @enduml
 
