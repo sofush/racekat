@@ -1,20 +1,23 @@
 package com.example.racekat.entity;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class User {
     private String username, password, name, about;
     private Role role;
+    private List<Cat> cats;
 
     public User() {}
 
-    public User(String username, String password, Role role, String name, String about) {
+    public User(String username, String password, Role role, String name, String about, List<Cat> cats) {
         this.username = username;
         this.password = password;
         this.role = role;
         this.name = name;
         this.about = about;
+        this.cats = cats;
     }
 
     public String getUsername() {
@@ -63,6 +66,14 @@ public class User {
 
     public void setAbout(String about) {
         this.about = about;
+    }
+
+    public List<Cat> getCats() {
+        return cats;
+    }
+
+    public void setCats(List<Cat> cats) {
+        this.cats = cats;
     }
 
     public List<String> getAuthorities() {

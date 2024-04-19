@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -61,20 +62,40 @@ public class UserRepository {
     }
 
     public User findUserByUsername(String username) {
-        String sql = """
+        String catsQuery = """
+            SELECT id, owner, name, breed, dob, male
+            FROM Cat
+            WHERE owner = ?;
+            """;
+
+        List<Cat> cats = this.jdbc.query(
+            catsQuery,
+            (rs, rowNum) -> new Cat(
+                rs.getInt("id"),
+                rs.getString("owner"),
+                rs.getString("name"),
+                rs.getString("breed"),
+                rs.getDate("dob").toLocalDate(),
+                rs.getBoolean("male")
+            ),
+            username
+        );
+
+        String userQuery = """
             SELECT username, password, role, name, about
             FROM User
             WHERE username = ?;
             """;
 
         List<User> users = this.jdbc.query(
-            sql,
+            userQuery,
             (rs, rowNum) -> new User(
                 rs.getString("username"),
                 rs.getString("password"),
                 Role.values()[rs.getInt("role")],
                 rs.getString("name"),
-                rs.getString("about")
+                rs.getString("about"),
+                cats
             ),
             username
         );

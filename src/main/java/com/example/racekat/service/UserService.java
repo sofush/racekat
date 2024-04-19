@@ -37,7 +37,8 @@ public class UserService {
             password,
             Role.USER,
             name,
-            about
+            about,
+            null
         );
 
         this.repo.addUser(user);
