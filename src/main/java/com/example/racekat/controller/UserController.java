@@ -24,6 +24,7 @@ public class UserController {
 
     @GetMapping("/user/{username}")
     public String displayUser(@PathVariable String username, Model model) {
+        // TODO: fjern afhængighed til User
         User user = this.userService.findUserByUsername(username);
 
         if (user == null) {
