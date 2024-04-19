@@ -1,11 +1,13 @@
 package com.example.racekat.controller;
 
+import com.example.racekat.entity.User;
 import com.example.racekat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
@@ -18,6 +20,23 @@ public class UserController {
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping("/user/{username}")
+    public String displayUser(@PathVariable String username, Model model) {
+        User user = this.userService.findUserByUsername(username);
+
+        if (user == null) {
+            model.addAttribute("message", "Could not find user with the provided username.");
+            return "display-user-error";
+        }
+
+        model.addAttribute("name", user.getName());
+        model.addAttribute("about", user.getAbout());
+        model.addAttribute("role", user.getRole());
+        model.addAttribute("cats", user.getCats());
+        model.addAttribute("username", username);
+        return "display-user.html";
     }
 
     @GetMapping("/register/user")

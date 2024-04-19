@@ -1,0 +1,17 @@
+body {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    column-gap: 20px;
+    grid-template-areas: "left right";
+}
+.section {
+    padding: 15px;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: lightgray;
+    background: whitesmoke;
+}

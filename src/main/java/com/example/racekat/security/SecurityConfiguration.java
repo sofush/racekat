@@ -26,9 +26,12 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-            // Kræver at alle HTTP-anmodninger skal autoriseres (med undtagelse af login siden, se nedenunder).
+            // Kræver at alle HTTP-anmodninger skal autoriseres (med nogle undtagelser).
             // Kun adminstratorer kan tilgå "/admin" ruten.
             .authorizeHttpRequests((config) -> config
+                .requestMatchers("/css/**").permitAll()
+                .requestMatchers("/svg/**").permitAll()
+                .requestMatchers("/user/**").permitAll()
                 .requestMatchers("/register/user").permitAll()
                 .anyRequest().hasRole("USER")
             )

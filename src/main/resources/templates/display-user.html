@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${username} + '\'s profile'"></title>
+    <link rel="stylesheet" href="/css/display-user.css"/>
+</head>
+<body>
+    <div class="grid">
+        <div style="grid-area: left">
+            <div class="section">
+                <img src="/svg/user.svg" alt="User profile picture">
+                <div>
+                    <h1 th:text="${name != null} ? ${name} : ${username}"></h1>
+                    <div th:if="${about != null}" th:text="${about}"></div>
+                    <div th:if="${about == null}" style="font-style: italic">(about section is empty)</div>
+                </div>
+            </div>
+        </div>
+        <div style="grid-area: right">
+            <div class="section" style="margin-bottom: 1em" th:each="cat : ${cats}">
+                <h3 th:text="${cat.name}"></h3>
+                <div th:text="'Breed: ' + ${cat.breed}"></div>
+                <div th:text="'Date of birth: ' + ${cat.dob}"></div>
+                <div th:text="'Male: ' + (${cat.male} ? 'yes' : 'no')"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
