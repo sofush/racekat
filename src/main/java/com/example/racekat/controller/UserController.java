@@ -34,7 +34,7 @@ public class UserController {
         model.addAttribute("role", user.getRole());
         model.addAttribute("cats", user.getCats());
         model.addAttribute("username", username);
-        return "display-user.html";
+        return "display-user";
     }
 
     @GetMapping("/register/user")
