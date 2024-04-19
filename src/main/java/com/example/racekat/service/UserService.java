@@ -6,10 +6,12 @@ import com.example.racekat.entity.User;
 import com.example.racekat.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.security.InvalidParameterException;
 import java.time.LocalDate;
 
 @Service
@@ -65,5 +67,29 @@ public class UserService {
             male);
 
         this.repo.addCat(cat);
+    }
+
+    public Cat findCatById(int id) {
+        return this.repo.findCatById(id);
+    }
+
+    public void deleteCatById(int id)
+        throws DataAccessException, AccessDeniedException
+    {
+        Cat cat = this.findCatById(id);
+        SecurityContext ctx = SecurityContextHolder.getContext();
+
+        if (!cat.getOwner().equals(ctx.getAuthentication().getName())) {
+            boolean isAdmin = ctx
+                .getAuthentication()
+                .getAuthorities()
+                .stream()
+                .anyMatch(auth -> auth.getAuthority().equals("ADMIN"));
+
+            if (!isAdmin)
+                throw new AccessDeniedException("Cat is not owned by this user.");
+        }
+
+        this.repo.deleteCat(cat);
     }
 }

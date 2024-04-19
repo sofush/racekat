@@ -8,7 +8,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -119,5 +118,37 @@ public class UserRepository {
             cat.getDob(),
             cat.getMale()
         );
+    }
+
+    public Cat findCatById(int id) throws DataAccessException {
+        String sql = """
+            SELECT id, owner, name, breed, dob, male
+            FROM Cat
+            WHERE id = ?;
+            """;
+
+        List<Cat> cats = this.jdbc.query(
+            sql,
+            (rs, rowNum) -> new Cat(
+                rs.getInt("id"),
+                rs.getString("owner"),
+                rs.getString("name"),
+                rs.getString("breed"),
+                rs.getDate("dob").toLocalDate(),
+                rs.getBoolean("male")
+            ),
+            id
+        );
+
+        return cats.getFirst();
+    }
+
+    public void deleteCat(Cat cat) throws DataAccessException {
+        String sql = """
+            DELETE FROM Cat
+            WHERE id = ?;
+            """;
+
+        this.jdbc.update(sql, cat.getId());
     }
 }
