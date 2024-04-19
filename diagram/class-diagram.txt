@@ -37,7 +37,7 @@ class UserController {
 	+ String registerCatPost(String owner, String name, String breed, LocalDate dob, String male, Model model)
 	+ String updateCat(Model model, Principal principal)
 	+ String updateCatPost(String owner, String name, String breed, LocalDate dob, String male, Model model)
-	+ String deleteCat(int id)
+	+ String deleteCat(int id, String redirect_username, Model model)
 }
 class UserService {
 	- userRepo: UserRepository
@@ -48,7 +48,7 @@ class UserService {
 	+ User findUserByUsername(String username)
 	+ void addCat(String owner, String name, String breed, LocalDate dob, boolean male)
 	+ void updateCat(String owner, String name, String breed, LocalDate dob, boolean male)
-	+ void deleteCat(int id)
+	+ void deleteCatById(int id)
 	+ Cat findCatById(int id)
 }
 class UserRepository {
