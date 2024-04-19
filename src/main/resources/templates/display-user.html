@@ -21,14 +21,15 @@
             <div class="section" style="margin-bottom: 1em">
                 <label style="font-size: 2em; font-weight: bold" th:text="${username} + '\'s cats'"></label>
                 <div th:if="${cats == null or cats.empty}">This user has not registered any cats.</div>
-            </div>
-            <div class="section" style="margin-bottom: 1em" th:each="cat : ${cats}">
-                <h3 th:text="${cat.name}"></h3>
-                <div th:text="'Breed: ' + ${cat.breed}"></div>
-                <div th:text="'Date of birth: ' + ${cat.dob}"></div>
-                <div th:text="'Male: ' + (${cat.male} ? 'yes' : 'no')"></div>
-                <h4>Actions</h4>
-                <a th:href="@{|/delete/cat/${cat.id}?username=${username}|}">Delete cat</a>
+                <div th:each="cat : ${cats}">
+                    <hr style="border-top: 1px dashed">
+                    <h3 th:text="${cat.name}"></h3>
+                    <div th:text="'Breed: ' + ${cat.breed}"></div>
+                    <div th:text="'Date of birth: ' + ${cat.dob}"></div>
+                    <div th:text="'Male: ' + (${cat.male} ? 'yes' : 'no')"></div>
+                    <h4>Actions</h4>
+                    <a th:href="@{|/delete/cat/${cat.id}?username=${username}|}">Delete cat</a>
+                </div>
             </div>
         </div>
     </div>
