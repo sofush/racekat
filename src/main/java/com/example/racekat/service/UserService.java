@@ -46,7 +46,7 @@ public class UserService {
         this.userRepo.addUser(user);
     }
 
-    public User findUserByUsername(String username) {
+    public User findUserByUsername(String username) throws DataAccessException {
         return this.userRepo.findUserByUsername(username);
     }
 

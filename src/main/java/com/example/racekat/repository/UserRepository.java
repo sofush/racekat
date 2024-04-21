@@ -60,7 +60,7 @@ public class UserRepository {
         );
     }
 
-    public User findUserByUsername(String username) {
+    public User findUserByUsername(String username) throws DataAccessException {
         String catsQuery = """
             SELECT id, owner, name, breed, dob, male
             FROM Cat

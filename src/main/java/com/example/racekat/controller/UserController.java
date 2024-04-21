@@ -24,7 +24,13 @@ public class UserController {
     @GetMapping("/user/{username}")
     public String displayUser(@PathVariable String username, Model model) {
         // TODO: fjern afhængighed til User
-        User user = this.userService.findUserByUsername(username);
+        User user;
+        try {
+            user = this.userService.findUserByUsername(username);
+        } catch (Exception e) {
+            model.addAttribute("message", e.getMessage());
+            return "display-user-error";
+        }
 
         if (user == null) {
             model.addAttribute("message", "Could not find user with the provided username.");
