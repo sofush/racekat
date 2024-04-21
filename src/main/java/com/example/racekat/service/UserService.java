@@ -16,11 +16,11 @@ import java.time.LocalDate;
 
 @Service
 public class UserService {
-    private final UserRepository repo;
+    private final UserRepository userRepo;
 
     @Autowired
     public UserService(UserRepository repo) {
-        this.repo = repo;
+        this.userRepo = repo;
     }
 
     public void addUser(String username, String password, String name, String about)
@@ -43,11 +43,11 @@ public class UserService {
             null
         );
 
-        this.repo.addUser(user);
+        this.userRepo.addUser(user);
     }
 
     public User findUserByUsername(String username) {
-        return this.repo.findUserByUsername(username);
+        return this.userRepo.findUserByUsername(username);
     }
 
     @PreAuthorize("#owner == authentication.principal.username || hasRole('ADMIN')")
@@ -66,11 +66,11 @@ public class UserService {
             dob,
             male);
 
-        this.repo.addCat(cat);
+        this.userRepo.addCat(cat);
     }
 
     public Cat findCatById(int id) {
-        return this.repo.findCatById(id);
+        return this.userRepo.findCatById(id);
     }
 
     public void deleteCatById(int id)
@@ -90,6 +90,6 @@ public class UserService {
                 throw new AccessDeniedException("Cat is not owned by this user.");
         }
 
-        this.repo.deleteCat(cat);
+        this.userRepo.deleteCat(cat);
     }
 }
