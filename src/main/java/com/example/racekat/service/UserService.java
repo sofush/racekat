@@ -74,6 +74,21 @@ public class UserService {
         this.userRepo.addCat(cat);
     }
 
+    @PreAuthorize("#owner == authentication.principal.username || hasRole('ADMIN')")
+    public void updateCat(Integer id, String owner, String name, String breed, LocalDate dob, Boolean male)
+        throws DataAccessException
+    {
+        Cat cat = new Cat(
+            id,
+            owner,
+            name,
+            breed,
+            dob,
+            male);
+
+        this.userRepo.updateCat(cat);
+    }
+
     public Cat findCatById(int id) {
         return this.userRepo.findCatById(id);
     }

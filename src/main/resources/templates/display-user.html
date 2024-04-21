@@ -30,7 +30,8 @@
                     <div th:text="'Date of birth: ' + ${cat.dob}"></div>
                     <div th:text="'Male: ' + (${cat.male} ? 'yes' : 'no')"></div>
                     <h4>Actions</h4>
-                    <a th:href="@{|/delete/cat/${cat.id}?username=${username}|}">Delete cat</a>
+                    <div><a th:href="@{|/delete/cat/${cat.id}?username=${username}|}">Delete cat</a></div>
+                    <div><a th:href="@{|/update/cat/${cat.id}|}">Edit cat</a></div>
                 </div>
             </div>
         </div>

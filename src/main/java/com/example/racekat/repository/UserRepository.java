@@ -167,6 +167,23 @@ public class UserRepository {
         );
     }
 
+    public void updateCat(Cat cat) throws DataAccessException {
+        String sql = """
+            UPDATE Cat
+            SET owner = ?, name = ?, breed = ?, dob = ?, male = ?
+            WHERE id = ?;
+            """;
+
+        this.jdbc.update(sql,
+            cat.getOwner(),
+            cat.getName(),
+            cat.getBreed(),
+            cat.getDob(),
+            cat.getMale(),
+            cat.getId()
+        );
+    }
+
     public Cat findCatById(int id) throws DataAccessException {
         String sql = """
             SELECT id, owner, name, breed, dob, male

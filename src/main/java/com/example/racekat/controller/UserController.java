@@ -1,5 +1,6 @@
 package com.example.racekat.controller;
 
+import com.example.racekat.entity.Cat;
 import com.example.racekat.entity.User;
 import com.example.racekat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,6 +122,50 @@ public class UserController {
         }
 
         return "register-cat-success";
+    }
+
+    @GetMapping("/update/cat/{id}")
+    public String updateCat(
+        @PathVariable("id") Integer id,
+        Principal principal,
+        Model model
+    ) {
+        // TODO: fjern afhængighed til Cat
+        Cat cat = this.userService.findCatById(id);
+
+        if (!cat.getOwner().contentEquals(principal.getName())) {
+            model.addAttribute("message", "Cat is not owned by this account.");
+            return "update-cat-error";
+        }
+
+        model.addAttribute("id", id);
+        model.addAttribute("owner", cat.getOwner());
+        model.addAttribute("breed", cat.getBreed());
+        model.addAttribute("dob", cat.getDob());
+        model.addAttribute("name", cat.getName());
+        model.addAttribute("male", cat.getMale());
+        return "update-cat";
+    }
+
+    @PostMapping("/update/cat")
+    public String updateCatPost(@ModelAttribute("id") Integer id,
+                                @ModelAttribute("owner") String owner,
+                                @ModelAttribute("name") String name,
+                                @ModelAttribute("breed") String breed,
+                                @ModelAttribute("dob") LocalDate dob,
+                                @ModelAttribute("male") String male,
+                                Model model
+    ) {
+        try {
+            boolean isMale = male != null && male.contentEquals("on");
+            this.userService.updateCat(id, owner, name, breed, dob, isMale);
+        } catch (Exception e) {
+            model.addAttribute("message", e.getMessage());
+            return "update-cat-error";
+        }
+
+        model.addAttribute("owner", owner);
+        return "update-cat-success";
     }
 
     @GetMapping("/delete/cat/{id}")
