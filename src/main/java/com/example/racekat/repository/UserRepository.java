@@ -151,4 +151,19 @@ public class UserRepository {
 
         this.jdbc.update(sql, cat.getId());
     }
+
+    public void deleteUser(String username) throws DataAccessException {
+        String catSql = """
+            DELETE FROM Cat
+            WHERE owner = ?;
+            """;
+
+        String userSql = """
+            DELETE FROM User
+            WHERE username = ?;
+            """;
+
+        this.jdbc.update(catSql, username);
+        this.jdbc.update(userSql, username);
+    }
 }

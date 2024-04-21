@@ -3,6 +3,8 @@ package com.example.racekat.controller;
 import com.example.racekat.entity.User;
 import com.example.racekat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -114,5 +116,27 @@ public class UserController {
         }
 
         return "redirect:/user/" + redirect_username;
+    }
+
+    @GetMapping("/delete/user/{username}")
+    public String deleteUser(
+        @PathVariable("username") String username,
+        Model model
+    ) {
+        try {
+            this.userService.deleteUser(username);
+        } catch (Exception e) {
+            model.addAttribute("message", e.getMessage());
+            return "delete-user-error";
+        }
+
+        SecurityContext ctx = SecurityContextHolder.getContext();
+
+        if (ctx.getAuthentication().getName().contentEquals(username)) {
+            // Log brugeren ud af systemet hvis de er i gang med at slette sin egen konto.
+            ctx.setAuthentication(null);
+        }
+
+        return "delete-user-success";
     }
 }

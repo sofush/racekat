@@ -92,4 +92,11 @@ public class UserService {
 
         this.userRepo.deleteCat(cat);
     }
+
+    @PreAuthorize("#username == authentication.principal.username || hasRole('ADMIN')")
+    public void deleteUser(String username)
+        throws DataAccessException, AccessDeniedException
+    {
+        this.userRepo.deleteUser(username);
+    }
 }

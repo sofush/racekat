@@ -14,6 +14,8 @@
                     <h1 th:text="${name != null} ? ${name} : ${username}"></h1>
                     <div th:if="${about != null}" th:text="${about}"></div>
                     <div th:if="${about == null}" style="font-style: italic">(about section is empty)</div>
+                    <h4>Actions</h4>
+                    <a th:href="@{|/delete/user/${username}|}">Delete user</a>
                 </div>
             </div>
         </div>
