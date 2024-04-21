@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -102,6 +103,52 @@ public class UserRepository {
         if (users.isEmpty()) return null;
 
         return users.getFirst();
+    }
+
+    public List<User> findAllUsers() throws DataAccessException {
+        String userQuery = """
+            SELECT username, password, role, name, about
+            FROM User;
+            """;
+
+        List<User> users = this.jdbc.query(
+            userQuery,
+            (rs, rowNum) -> new User(
+                rs.getString("username"),
+                rs.getString("password"),
+                Role.values()[rs.getInt("role")],
+                rs.getString("name"),
+                rs.getString("about"),
+                new ArrayList<>()
+            )
+        );
+
+        if (users.isEmpty()) return null;
+
+        for (User user : users) {
+            String catsQuery = """
+            SELECT id, owner, name, breed, dob, male
+            FROM Cat
+            WHERE owner = ?;
+            """;
+
+            List<Cat> cats = this.jdbc.query(
+                catsQuery,
+                (rs, rowNum) -> new Cat(
+                    rs.getInt("id"),
+                    rs.getString("owner"),
+                    rs.getString("name"),
+                    rs.getString("breed"),
+                    rs.getDate("dob").toLocalDate(),
+                    rs.getBoolean("male")
+                ),
+                user.getUsername()
+            );
+
+            user.setCats(cats);
+        }
+
+        return users;
     }
 
     public void addCat(Cat cat) throws DataAccessException {

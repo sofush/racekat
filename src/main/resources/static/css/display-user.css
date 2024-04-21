@@ -15,3 +15,8 @@ body {
     border-color: lightgray;
     background: whitesmoke;
 }
+.list {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}

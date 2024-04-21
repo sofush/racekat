@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Display members error</title>
+</head>
+<body>
+    <div>Could not display members due to the following reason:</div>
+    <ul>
+        <li th:text="${message}"></li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Members</title>
+    <link rel="stylesheet" href="/css/display-user.css"/>
+</head>
+<body>
+    <div class="list">
+        <div class="section" th:each="user : ${users}">
+            <img src="/svg/user.svg" alt="User profile picture">
+            <div>
+                <h2 style="text-align: center">
+                    <a th:text="${name != null} ? ${user.name} : ${user.username}" th:href="@{|/user/${user.username}|}"></a>
+                </h2>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

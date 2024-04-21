@@ -9,6 +9,9 @@ import java.security.Principal;
 public class IndexController {
     @GetMapping("/")
     public String index(Principal principal) {
-        return "redirect:/user/" + principal.getName();
+        if (principal == null)
+            return "redirect:/login";
+
+        return "redirect:/members";
     }
 }

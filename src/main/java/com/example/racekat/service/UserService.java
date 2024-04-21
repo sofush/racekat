@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -48,6 +49,10 @@ public class UserService {
 
     public User findUserByUsername(String username) throws DataAccessException {
         return this.userRepo.findUserByUsername(username);
+    }
+
+    public List<User> findAllUsers() throws DataAccessException {
+        return this.userRepo.findAllUsers();
     }
 
     @PreAuthorize("#owner == authentication.principal.username || hasRole('ADMIN')")

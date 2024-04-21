@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -19,6 +20,20 @@ public class UserController {
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping("/members")
+    public String displayMembers(Model model) {
+        // TODO: fjern afhængighed til User
+        List<User> users;
+        try {
+            users = this.userService.findAllUsers();
+        } catch (Exception e) {
+            return "display-members-error";
+        }
+
+        model.addAttribute("users", users);
+        return "display-members";
     }
 
     @GetMapping("/user/{username}")

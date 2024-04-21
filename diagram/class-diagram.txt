@@ -27,6 +27,7 @@ class Cat {
 class UserController {
 	- userService: UserService
 	+ UserController(UserService userService)
+	+ String displayMembers(Model model, Principal principal)
 	+ String registerUser(Model model)
 	+ String registerUserPost(String username, String password, String repeat_password, String name, String about, Model model)
 	+ String displayUser(String username, Model model)
@@ -46,6 +47,7 @@ class UserService {
 	+ void updateUser(String username, String password, String repeat_password, String name, String about)
 	+ void deleteUser(String username)
 	+ User findUserByUsername(String username)
+	+ List<User> findAllUsers()
 	+ void addCat(String owner, String name, String breed, LocalDate dob, boolean male)
 	+ void updateCat(String owner, String name, String breed, LocalDate dob, boolean male)
 	+ void deleteCatById(int id)
@@ -58,6 +60,7 @@ class UserRepository {
 	+ void updateUser(User user)
 	+ void deleteUser(User user)
 	+ User findUserByUsername(String username)
+	+ List<User> findAllUsers()
 	+ void addCat(Cat cat)
 	+ void updateCat(Cat cat)
 	+ void deleteCat(Cat cat)
