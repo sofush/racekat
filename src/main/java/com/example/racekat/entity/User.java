@@ -25,8 +25,8 @@ public class User {
     }
 
     public void setUsername(String username) {
-        if (username == null || username.length() > 20) {
-            throw new IllegalArgumentException("Username must be 1-20 characters long.");
+        if (username == null || username.length() < 5 || username.length() > 20) {
+            throw new IllegalArgumentException("Username must be 5-20 characters long.");
         }
 
         this.username = username;
@@ -37,8 +37,8 @@ public class User {
     }
 
     public void setPassword(String password) {
-        if (password == null || password.isEmpty()) {
-            throw new IllegalArgumentException("Password must not be empty");
+        if (password == null || password.length() < 3) {
+            throw new IllegalArgumentException("Password must be at least 3 characters long.");
         }
 
         this.password = password;
