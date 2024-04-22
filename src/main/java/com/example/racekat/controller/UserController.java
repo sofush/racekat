@@ -25,7 +25,6 @@ public class UserController {
 
     @GetMapping("/members")
     public String displayMembers(Model model) {
-        // TODO: fjern afhængighed til User
         List<User> users;
         try {
             users = this.userService.findAllUsers();
@@ -39,7 +38,6 @@ public class UserController {
 
     @GetMapping("/user/{username}")
     public String displayUser(@PathVariable String username, Model model) {
-        // TODO: fjern afhængighed til User
         User user;
         try {
             user = this.userService.findUserByUsername(username);
@@ -131,7 +129,6 @@ public class UserController {
         Principal principal,
         Model model
     ) {
-        // TODO: fjern afhængighed til Cat
         Cat cat = this.userService.findCatById(id);
 
         if (!cat.getOwner().contentEquals(principal.getName())) {
