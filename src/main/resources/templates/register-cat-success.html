@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Successfully registered cat</title>
 </head>
 <body>
     <div>Cat has been registered.</div>
-    <a href="/">Click here</a>
-    <label> to go to the homepage.</label>
+    <div>
+        <a href="/">Click here</a>
+        <label> to go to the homepage.</label>
+    </div>
+    <div>
+        <a th:href="@{|/user/${owner}|}">Click here</a>
+        <label> to go to owner's profile.</label>
+    </div>
 </body>
 </html>

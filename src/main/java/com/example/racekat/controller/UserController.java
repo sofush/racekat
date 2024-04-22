@@ -121,6 +121,7 @@ public class UserController {
             return "register-cat-error";
         }
 
+        model.addAttribute("owner", owner);
         return "register-cat-success";
     }
 
