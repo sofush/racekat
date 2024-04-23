@@ -27,12 +27,12 @@ public class UserService {
     public void addUser(String username, String password, String name, String about)
         throws DataAccessException, IllegalArgumentException
     {
-        if (username == null || username.isEmpty()) {
-            throw new IllegalArgumentException("Username must be a non-empty string.");
+        if (username == null || username.length() < 5 || username.length() > 20) {
+            throw new IllegalArgumentException("Username must be 5-20 characters long.");
         }
 
-        if (password == null || password.isEmpty()) {
-            throw new IllegalArgumentException("Password must a non-empty string.");
+        if (password == null || password.length() < 3) {
+            throw new IllegalArgumentException("Password must be at least 3 characters long.");
         }
 
         User user = new User(
