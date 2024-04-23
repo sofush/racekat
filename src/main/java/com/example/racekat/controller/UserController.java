@@ -4,6 +4,7 @@ import com.example.racekat.entity.Cat;
 import com.example.racekat.entity.User;
 import com.example.racekat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -164,6 +165,56 @@ public class UserController {
 
         model.addAttribute("owner", owner);
         return "update-cat-success";
+    }
+
+    @GetMapping("/update/user/{username}")
+    public String updateUser(@PathVariable("username") String username,
+                             Model model
+    ) {
+        User user = this.userService.findUserByUsername(username);
+        SecurityContext ctx = SecurityContextHolder.getContext();
+        boolean isAdmin = ctx
+            .getAuthentication()
+            .getAuthorities()
+            .stream()
+            .anyMatch(auth -> auth.getAuthority().equals("ADMIN"));
+
+        if (!ctx.getAuthentication().getName().equals(username) && !isAdmin) {
+            model.addAttribute(
+                "message",
+                "You do not have permission to edit this user's profile."
+            );
+            return "update-user-error";
+        }
+
+        model.addAttribute("username", username);
+        model.addAttribute("password", user.getPassword());
+        model.addAttribute("name", user.getName());
+        model.addAttribute("about", user.getAbout());
+        return "update-user";
+    }
+
+    @PostMapping("/update/user")
+    public String updateUser(@ModelAttribute("username") String username,
+                             @ModelAttribute("password") String password,
+                             @ModelAttribute("repeat-password") String repeat_password,
+                             @ModelAttribute("name") String name,
+                             @ModelAttribute("about") String about,
+                             Model model
+    ) {
+        if (!password.contentEquals(repeat_password)) {
+            model.addAttribute("message", "Password and repeat password do not match.");
+            return "update-user-error";
+        }
+
+        try {
+            this.userService.updateUser(username, password, name, about);
+        } catch (Exception e) {
+            model.addAttribute("message", e.getMessage());
+            return "update-user-error";
+        }
+
+        return "redirect:/user/" + username;
     }
 
     @GetMapping("/delete/cat/{id}")

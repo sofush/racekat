@@ -31,7 +31,7 @@ class UserController {
 	+ String registerUser(Model model)
 	+ String registerUserPost(String username, String password, String repeat_password, String name, String about, Model model)
 	+ String displayUser(String username, Model model)
-	+ String updateUser(Model model)
+	+ String updateUser(String username, Model model)
 	+ String updateUserPost(String username, String password, String repeat_password, String name, String about, Model model)
 	+ String deleteUser(String username, Model model)
 	+ String registerCat(Model model, Principal principal)
@@ -43,8 +43,8 @@ class UserController {
 class UserService {
 	- userRepo: UserRepository
 	+ UserService(UserRepository repo)
-	+ void addUser(String username, String password, String repeat_password, String name, String about)
-	+ void updateUser(String username, String password, String repeat_password, String name, String about)
+	+ void addUser(String username, String password, String name, String about)
+	+ void updateUser(String username, String password, String name, String about)
 	+ void deleteUser(String username)
 	+ User findUserByUsername(String username)
 	+ List<User> findAllUsers()
