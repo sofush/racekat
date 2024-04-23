@@ -19,7 +19,7 @@ class Kat {
 class Rolle {}
 
 Rolle "1" -r-- "1" Bruger
-Bruger "1" -r-- "0..*" Kat
+Bruger "1" -r-- "0..m" Kat
 
 @enduml
 
