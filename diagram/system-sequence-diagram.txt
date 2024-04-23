@@ -1,0 +1,20 @@
+@startuml
+scale 1920*1080
+actor Medlem
+Medlem -> System: Besøger hjemmeside
+Medlem <-- System: Viser login formular
+Medlem -> System: Indtast loginoplysninger (brugernavn, password)
+Medlem <-- System: Vis medlemsliste
+Medlem -> System: Trykker på et medlem fra listen (brugernavn)
+Medlem <-- System: Viser profilside for medlem
+Medlem -> System: Trykker "registrer kat..." link (brugernavn)
+Medlem <-- System: Viser formular
+Medlem -> System: Indtaster oplysninger om kat (navn, katterace, fødselsdato, køn)
+activate System
+database Database
+System -> Database: Gemmer oplysninger
+System <-- Database: Resultat
+deactivate System
+Medlem <-- System: Viser side med resultat
+@enduml
+
