@@ -116,7 +116,7 @@ public class UserService {
                 .getAuthentication()
                 .getAuthorities()
                 .stream()
-                .anyMatch(auth -> auth.getAuthority().equals("ADMIN"));
+                .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
 
             if (!isAdmin)
                 throw new AccessDeniedException("Cat is not owned by this user.");

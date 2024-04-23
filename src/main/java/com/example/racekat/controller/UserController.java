@@ -177,7 +177,7 @@ public class UserController {
             .getAuthentication()
             .getAuthorities()
             .stream()
-            .anyMatch(auth -> auth.getAuthority().equals("ADMIN"));
+            .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
 
         if (!ctx.getAuthentication().getName().equals(username) && !isAdmin) {
             model.addAttribute(
