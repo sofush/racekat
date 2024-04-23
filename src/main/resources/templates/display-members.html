@@ -11,7 +11,7 @@
             <img src="/svg/user.svg" alt="User profile picture">
             <div>
                 <h2 style="text-align: center">
-                    <a th:text="${name != null} ? ${user.name} : ${user.username}" th:href="@{|/user/${user.username}|}"></a>
+                    <a th:text="${user.name != null} ? ${user.name} : ${user.username}" th:href="@{|/user/${user.username}|}"></a>
                 </h2>
             </div>
         </div>
