@@ -27,7 +27,6 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
             // Kræver at alle HTTP-anmodninger skal autoriseres (med nogle undtagelser).
-            // Kun adminstratorer kan tilgå "/admin" ruten.
             .authorizeHttpRequests((config) -> config
                 .requestMatchers("/css/**").permitAll()
                 .requestMatchers("/svg/**").permitAll()
@@ -41,8 +40,8 @@ public class SecurityConfiguration {
             )
             // Tillad alle at logge ud.
             .logout(LogoutConfigurer::permitAll)
-            // Tillader "HTTP Basic Authentication" hvilket vil sige at Spring Security
-            // vil tjekke om der er brugernavn og password i de HTTP-anmodninger den filtrerer.
+            // Tillader "HTTP Basic Access Authentication" (beskrevet i RFC 7617) hvilket vil sige at
+            // Spring Security vil tjekke om der er brugernavn og password i de HTTP-anmodninger den filtrerer.
             .httpBasic(Customizer.withDefaults())
             .build();
     }
