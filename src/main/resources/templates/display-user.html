@@ -6,38 +6,38 @@
     <link rel="stylesheet" href="/css/display-user.css"/>
 </head>
 <body>
-    <div class="grid">
-        <div style="grid-area: left">
-            <div class="section">
-                <img src="/svg/user.svg" alt="User profile picture">
-                <div>
-                    <h1 th:text="${name != null} ? ${name} : ${username}"></h1>
-                    <div th:if="${about != null}" th:text="${about}"></div>
-                    <div th:if="${about == null}" style="font-style: italic">(about section is empty)</div>
-                    <h4>Actions</h4>
-                    <div><a th:href="@{|/delete/user/${username}|}">Delete user</a></div>
-                    <div><a th:href="@{|/update/user/${username}|}">Edit user...</a></div>
-                </div>
-            </div>
-        </div>
-        <div style="grid-area: right">
-            <div class="section" style="margin-bottom: 1em">
-                <label style="font-size: 2em; font-weight: bold" th:text="${username} + '\'s cats'"></label>
-                <div th:if="${cats == null or cats.empty}">This user has not registered any cats.</div>
-                <div th:each="cat : ${cats}">
-                    <hr>
-                    <h3 th:text="${cat.name}"></h3>
-                    <div th:text="'Breed: ' + ${cat.breed}"></div>
-                    <div th:text="'Date of birth: ' + ${cat.dob}"></div>
-                    <div th:text="'Male: ' + (${cat.male} ? 'yes' : 'no')"></div>
-                    <h4>Actions</h4>
-                    <div><a th:href="@{|/delete/cat/${cat.id}?username=${username}|}">Delete cat</a></div>
-                    <div><a th:href="@{|/update/cat/${cat.id}|}">Edit cat...</a></div>
-                </div>
-                <hr>
-                <a href="/register/cat">+ Register a cat...</a>
-            </div>
-        </div>
-    </div>
+	<div class="grid">
+		<div style="grid-area: left">
+			<div class="section">
+				<img src="/svg/user.svg" alt="User profile picture">
+				<div>
+					<h1 th:text="${name != null} ? ${name} : ${username}"></h1>
+					<div th:if="${about != null}" th:text="${about}"></div>
+					<div th:if="${about == null}" style="font-style: italic">(about section is empty)</div>
+					<h4>Actions</h4>
+					<div><a th:href="@{|/delete/user/${username}|}">Delete user</a></div>
+					<div><a th:href="@{|/update/user/${username}|}">Edit user...</a></div>
+				</div>
+			</div>
+		</div>
+		<div style="grid-area: right">
+			<div class="section" style="margin-bottom: 1em">
+				<label style="font-size: 2em; font-weight: bold" th:text="${username} + '\'s cats'"></label>
+				<div th:if="${cats == null or cats.empty}">This user has not registered any cats.</div>
+				<div th:each="cat : ${cats}">
+					<hr>
+					<h3 th:text="${cat.name}"></h3>
+					<div th:text="'Breed: ' + ${cat.breed}"></div>
+					<div th:text="'Date of birth: ' + ${cat.dob}"></div>
+					<div th:text="'Male: ' + (${cat.male} ? 'yes' : 'no')"></div>
+					<h4>Actions</h4>
+					<div><a th:href="@{|/delete/cat/${cat.id}?username=${username}|}">Delete cat</a></div>
+					<div><a th:href="@{|/update/cat/${cat.id}|}">Edit cat...</a></div>
+				</div>
+				<hr>
+				<a href="/register/cat">+ Register a cat...</a>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

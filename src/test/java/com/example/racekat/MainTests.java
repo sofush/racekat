@@ -58,11 +58,11 @@ class MainTests {
 		UserService service = new UserService(mockRepo);
 
 		Exception e = assertThrows(IllegalArgumentException.class, () -> service.addUser(
-            invalidUser.getUsername(),
-            invalidUser.getPassword(),
-            invalidUser.getName(),
-            invalidUser.getAbout()
-        ));
+			invalidUser.getUsername(),
+			invalidUser.getPassword(),
+			invalidUser.getName(),
+			invalidUser.getAbout()
+		));
 		assertThat(e.getMessage().toLowerCase()).contains("password");
 	}
 }

@@ -5,30 +5,30 @@
     <title>Register user</title>
 </head>
 <body>
-    <form action="#" method="POST" th:action="@{/register/user}">
-        <p>
-            <label for="username">Username:</label>
-            <input type="text" id="username" th:name="username"/>
-        </p>
-        <p>
-            <label for="password">Password: </label>
-            <input type="password" id="password" th:name="password">
-        </p>
-        <p>
-            <label for="repeat-password">Repeat password: </label>
-            <input type="password" id="repeat-password" th:name="repeat-password">
-        </p>
-        <p>
-            <label for="name">Name: </label>
-            <input type="text" id="name" th:name="name">
-        </p>
-        <p>
-            <label for="about">Write something about yourself...</label>
-            <textarea name="about" id="about" th:name="about"></textarea>
-        </p>
-        <p>
-            <button type="submit">Register</button>
-        </p>
-    </form>
+	<form action="#" method="POST" th:action="@{/register/user}">
+		<p>
+			<label for="username">Username:</label>
+			<input type="text" id="username" th:name="username"/>
+		</p>
+		<p>
+			<label for="password">Password: </label>
+			<input type="password" id="password" th:name="password">
+		</p>
+		<p>
+			<label for="repeat-password">Repeat password: </label>
+			<input type="password" id="repeat-password" th:name="repeat-password">
+		</p>
+		<p>
+			<label for="name">Name: </label>
+			<input type="text" id="name" th:name="name">
+		</p>
+		<p>
+			<label for="about">Write something about yourself...</label>
+			<textarea name="about" id="about" th:name="about"></textarea>
+		</p>
+		<p>
+			<button type="submit">Register</button>
+		</p>
+	</form>
 </body>
 </html>

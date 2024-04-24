@@ -5,29 +5,29 @@
     <title>Register cat</title>
 </head>
 <body>
-    <form action="#" method="POST" th:action="@{/register/cat}">
-        <p>
-            <input type="hidden" id="owner" th:name="owner" th:value="*{owner}"/>
-        </p>
-        <p>
-            <label for="name">Name:</label>
-            <input type="text" id="name" th:name="name"/>
-        </p>
-        <p>
-            <label for="breed">Breed:</label>
-            <input type="text" id="breed" th:name="breed"/>
-        </p>
-        <p>
-            <label for="dob">Date of birth:</label>
-            <input type="date" id="dob" th:name="dob"/>
-        </p>
-        <p>
-            <label for="male">Male:</label>
-            <input type="checkbox" id="male" th:name="male"/>
-        </p>
-        <p>
-            <button type="submit">Register</button>
-        </p>
-    </form>
+	<form action="#" method="POST" th:action="@{/register/cat}">
+		<p>
+			<input type="hidden" id="owner" th:name="owner" th:value="*{owner}"/>
+		</p>
+		<p>
+			<label for="name">Name:</label>
+			<input type="text" id="name" th:name="name"/>
+		</p>
+		<p>
+			<label for="breed">Breed:</label>
+			<input type="text" id="breed" th:name="breed"/>
+		</p>
+		<p>
+			<label for="dob">Date of birth:</label>
+			<input type="date" id="dob" th:name="dob"/>
+		</p>
+		<p>
+			<label for="male">Male:</label>
+			<input type="checkbox" id="male" th:name="male"/>
+		</p>
+		<p>
+			<button type="submit">Register</button>
+		</p>
+	</form>
 </body>
 </html>

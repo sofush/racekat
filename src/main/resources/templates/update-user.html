@@ -5,29 +5,29 @@
     <title>Edit user information</title>
 </head>
 <body>
-    <form action="#" method="POST" th:action="@{/update/user}">
-        <p>
-            <input type="hidden" id="username" th:name="username" th:value="${username}"/>
-        </p>
-        <p>
-            <label for="password">New password: </label>
-            <input type="password" id="password" th:name="password">
-        </p>
-        <p>
-            <label for="repeat-password">Repeat password: </label>
-            <input type="password" id="repeat-password" th:name="repeat-password">
-        </p>
-        <p>
-            <label for="name">Name: </label>
-            <input type="text" id="name" th:name="name" th:value="${name}">
-        </p>
-        <p>
-            <label for="about">Write something about yourself...</label>
-            <textarea name="about" id="about" th:name="about" th:text="${about}"></textarea>
-        </p>
-        <p>
-            <button type="submit">Update</button>
-        </p>
-    </form>
+	<form action="#" method="POST" th:action="@{/update/user}">
+		<p>
+			<input type="hidden" id="username" th:name="username" th:value="${username}"/>
+		</p>
+		<p>
+			<label for="password">New password: </label>
+			<input type="password" id="password" th:name="password">
+		</p>
+		<p>
+			<label for="repeat-password">Repeat password: </label>
+			<input type="password" id="repeat-password" th:name="repeat-password">
+		</p>
+		<p>
+			<label for="name">Name: </label>
+			<input type="text" id="name" th:name="name" th:value="${name}">
+		</p>
+		<p>
+			<label for="about">Write something about yourself...</label>
+			<textarea name="about" id="about" th:name="about" th:text="${about}"></textarea>
+		</p>
+		<p>
+			<button type="submit">Update</button>
+		</p>
+	</form>
 </body>
 </html>
