@@ -6,11 +6,9 @@
     <link rel="stylesheet" href="/css/display-user.css"/>
 </head>
 <body>
-	<p>
-		<a href="/members">< Members</a>
-	</p>
 	<div class="grid">
-		<div style="grid-area: left">
+		<a href="/members" style="grid-area: left; grid-row: 1">< Members</a>
+		<div style="grid-area: left; grid-row: 2">
 			<div class="section">
 				<img src="/svg/user.svg" alt="User profile picture">
 				<div>
@@ -23,7 +21,7 @@
 				</div>
 			</div>
 		</div>
-		<div style="grid-area: right">
+		<div style="grid-area: right; grid-row: 2">
 			<div class="section" style="margin-bottom: 1em">
 				<label style="font-size: 2em; font-weight: bold" th:text="${username} + '\'s cats'"></label>
 				<div th:if="${cats == null or cats.empty}">This user has not registered any cats.</div>

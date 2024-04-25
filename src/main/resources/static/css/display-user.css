@@ -5,6 +5,7 @@ body {
 .grid {
 	display: grid;
 	grid-template-columns: 3fr 7fr;
+	grid-template-rows: 1.5em auto;
 	column-gap: 20px;
 	grid-template-areas: "left right";
 }
