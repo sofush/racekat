@@ -1,0 +1,15 @@
+@startuml
+--> UserController: registerUserPost(username, password, repeat_password, ...)
+
+alt succesfuld afvikling
+	UserController --> UserService: addUser(username, password, ...)
+	UserService --> UserRepository: addUser(user)
+	activate UserRepository
+	UserController <-- UserRepository: void
+	deactivate UserRepository
+	<-- UserController: register-user-success.html
+else ugyldig brugerinformation eller database fejl
+	<-- UserController: register-user-error.html
+end
+@enduml
+
