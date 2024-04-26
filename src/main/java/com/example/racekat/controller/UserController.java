@@ -137,7 +137,7 @@ public class UserController {
                 .getAuthorities()
                 .stream()
                 .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
-        
+
         if (!cat.getOwner().contentEquals(principal.getName()) && !isAdmin) {
             model.addAttribute("message", "Cat is not owned by this account.");
             return "update-cat-error";
