@@ -23,7 +23,7 @@
 		</div>
 		<div style="grid-area: right; grid-row: 2">
 			<div class="section" style="margin-bottom: 1em">
-				<label style="font-size: 2em; font-weight: bold" th:text="${username} + '\'s cats'"></label>
+				<label style="font-size: 2em; font-weight: bold" th:text="(${name != null} ? ${name} : ${username}) + '\'s cats'"></label>
 				<div th:if="${cats == null or cats.empty}">This user has not registered any cats.</div>
 				<div th:each="cat : ${cats}">
 					<hr>
