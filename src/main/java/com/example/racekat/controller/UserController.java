@@ -4,7 +4,6 @@ import com.example.racekat.entity.Cat;
 import com.example.racekat.entity.User;
 import com.example.racekat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -132,7 +131,14 @@ public class UserController {
     ) {
         Cat cat = this.userService.findCatById(id);
 
-        if (!cat.getOwner().contentEquals(principal.getName())) {
+        SecurityContext ctx = SecurityContextHolder.getContext();
+        boolean isAdmin = ctx
+                .getAuthentication()
+                .getAuthorities()
+                .stream()
+                .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
+        
+        if (!cat.getOwner().contentEquals(principal.getName()) && !isAdmin) {
             model.addAttribute("message", "Cat is not owned by this account.");
             return "update-cat-error";
         }
